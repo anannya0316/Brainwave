@@ -88,17 +88,7 @@ The web application architecture will consist of the following components:
 - The application utilizes a Continuous Integration and Continuous Deployment (CI/CD) pipeline facilitated by Streamlit Cloud. 
 - This pipeline automates the process of testing, building, and deploying the application. 
 - Any changes made to the codebase are automatically tested and deployed to the live environment, ensuring that the latest updates are always available to users without manual intervention.
-
-## 📜 License 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## 📧 Contact 
-For any questions or suggestions, feel free to reach out:
-
-- **Email**: mayur.dabade21@vit.edu
-- **GitHub** : [mayurd8862](https://github.com/mayur8862)
-- **LinkedIn** : [https://www.linkedin.com/in/mayur-dabade-b527a9230](https://www.linkedin.com/in/mayur-dabade-b527a9230)
-
+- 
 ---
 [Click here](https://brainwave.streamlit.app/) to use the web application.
 
