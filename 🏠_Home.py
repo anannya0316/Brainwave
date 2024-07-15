@@ -2,7 +2,7 @@ import streamlit as st
 import json
 from streamlit_lottie import st_lottie
 
-from utils import contributor_card, enric_info
+# from utils import contributor_card, enric_info
 # with st.sidebar:
 
 #     st.divider()
