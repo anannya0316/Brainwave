@@ -88,7 +88,7 @@ The web application architecture will consist of the following components:
 - The application utilizes a Continuous Integration and Continuous Deployment (CI/CD) pipeline facilitated by Streamlit Cloud. 
 - This pipeline automates the process of testing, building, and deploying the application. 
 - Any changes made to the codebase are automatically tested and deployed to the live environment, ensuring that the latest updates are always available to users without manual intervention.
-- 
+
 ---
 [Click here](https://brainwave.streamlit.app/) to use the web application.
 
