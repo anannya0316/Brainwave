@@ -14,6 +14,15 @@ except KeyError as e:
 except Exception as e:
     st.error(f"Error loading MongoDB connection string: {e}")
 
+# Verify email password is read correctly
+try:
+    email_password = st.secrets["mail_pwd"]
+    st.write("Email password loaded successfully.")
+except KeyError as e:
+    st.error(f"KeyError: {e}")
+except Exception as e:
+    st.error(f"Error loading email password: {e}")
+
 def update_password(email, new_password):
     myclient = pymongo.MongoClient(mongodb_connect)
     mydb = myclient["Brainwave"]
@@ -60,6 +69,9 @@ def sign_up(name, mail, pwd):
     if not name or not mail or not pwd:
         return False, "⚠️ All fields are required."
 
+    # Diagnostic check
+    st.write("sign_up: mongodb_connect:", mongodb_connect)
+
     myclient = pymongo.MongoClient(mongodb_connect)
     mydb = myclient["Brainwave"]
     mycol = mydb["Login_Credentials"]
@@ -74,6 +86,9 @@ def sign_up(name, mail, pwd):
 def sign_in(mail, pwd):
     if not mail or not pwd:
         return None
+
+    # Diagnostic check
+    st.write("sign_in: mongodb_connect:", mongodb_connect)
 
     myclient = pymongo.MongoClient(mongodb_connect)
     mydb = myclient["Brainwave"]
@@ -139,7 +154,7 @@ if not st.session_state["signedout"]:
     else:
         otp_generated = generateOTP()
 
-        sender_email = "anannya0316@gmail.com"
+        sender_email = "mayurdabade1103@gmail.com"
         password = st.secrets['mail_pwd']  # Your App Password
         subject = "BrainWave password recovery"
         body = f"Verification OTP for password recovery - {otp_generated}."
