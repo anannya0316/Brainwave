@@ -152,7 +152,7 @@ if not st.session_state["signedout"]:
     else:
         otp_generated = generateOTP()
 
-        sender_email = "mayurdabade1103@gmail.com"
+        sender_email = "anannya0316@gmail.com"
         password = st.secrets['mail_pwd'] # Your App Password
         subject = "BrainWave password recovery"
         body = f"Verification OTP for password recovery - {otp_generated}."
