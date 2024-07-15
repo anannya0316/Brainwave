@@ -1,12 +1,20 @@
 import streamlit as st
 import pymongo
-from otp_test import generateOTP,send_otp
-# mongodb_connect = st.secrets.mongodb_atlas
-mongodb_connect = st.secrets["mongodb_atlas"]["mongodb_connect"]
+from otp_test import generateOTP, send_otp
+
+# Print available secrets keys to diagnose issues
+st.write("Available secrets keys:", st.secrets.keys())
+
+try:
+    # Load MongoDB connection string from secrets
+    mongodb_connect = st.secrets["mongodb_atlas"]["mongodb_connect"]
+    st.write("MongoDB connection string loaded successfully.")
+except KeyError as e:
+    st.error(f"KeyError: {e}")
+except Exception as e:
+    st.error(f"Error loading MongoDB connection string: {e}")
 
 def update_password(email, new_password):
-
-    # myclient = pymongo.MongoClient("mongodb://localhost:27017")
     myclient = pymongo.MongoClient(mongodb_connect)
     mydb = myclient["Brainwave"]
     mycol = mydb["Login_Credentials"]
@@ -16,9 +24,7 @@ def update_password(email, new_password):
         {"$set": {"Password": new_password}}
     )
 
-
 def email_exists(email):
-    # myclient = pymongo.MongoClient("mongodb://localhost:27017")
     myclient = pymongo.MongoClient(mongodb_connect)
     mydb = myclient["Brainwave"]
     mycol = mydb["Login_Credentials"]
@@ -28,10 +34,8 @@ def email_exists(email):
     else:
         return False
 
-
 @st.experimental_dialog("🔑 Reset Your Password")
-def verify_popup(mail,otp_generated):
-    
+def verify_popup(mail, otp_generated):
     st.write(f"Verification OTP sent on your mail '{mail}'")
     
     otp = st.text_input("Enter Your OTP: ")
@@ -40,31 +44,23 @@ def verify_popup(mail,otp_generated):
             st.success("✔️ OTP verified successfully")
             pass1 = st.text_input("Enter New Password:", type='password')
             pass2 = st.text_input("Enter Password once again:", type='password')
-
         else:
             st.error("❌ Please enter correct OTP")
 
     if st.button("Submit"):
-        if pass1 != pass2 :
-            st.warning("Please enter same passwords !!")
-        
-        elif (len(pass1)<8):
-            st.warning("Password length should be of 8 !!")
-
+        if pass1 != pass2:
+            st.warning("Please enter the same passwords !!")
+        elif len(pass1) < 8:
+            st.warning("Password length should be at least 8 characters !!")
         else:
-            update_password(mail,pass1)
+            update_password(mail, pass1)
             st.success("👍 Your password is updated")
-        
 
-# Function to sign up a new user
 def sign_up(name, mail, pwd):
     if not name or not mail or not pwd:
-        return False, "⚠️All fields are required."
+        return False, "⚠️ All fields are required."
 
-    # myclient = pymongo.MongoClient("mongodb://localhost:27017")
     myclient = pymongo.MongoClient(mongodb_connect)
-
-    
     mydb = myclient["Brainwave"]
     mycol = mydb["Login_Credentials"]
 
@@ -75,15 +71,11 @@ def sign_up(name, mail, pwd):
     mycol.insert_one(info)
     return True, "Account created successfully!"
 
-# Function to sign in an existing user
 def sign_in(mail, pwd):
-
     if not mail or not pwd:
         return None
 
-    # myclient = pymongo.MongoClient("mongodb://localhost:27017")
     myclient = pymongo.MongoClient(mongodb_connect)
-
     mydb = myclient["Brainwave"]
     mycol = mydb["Login_Credentials"]
 
@@ -93,7 +85,6 @@ def sign_in(mail, pwd):
     else:
         return None
 
-# Function to handle user login
 def handle_login():
     userinfo = sign_in(st.session_state.email_input, st.session_state.password_input)
     if userinfo:
@@ -102,9 +93,8 @@ def handle_login():
         st.session_state.signedout = True
         st.session_state.signout = True
     else:
-        st.warning('⚠️Login Failed')
+        st.warning('⚠️ Login Failed')
 
-# Function to handle user logout
 def handle_logout():
     st.session_state.signout = False
     st.session_state.signedout = False
@@ -112,12 +102,8 @@ def handle_logout():
     st.session_state.useremail = ''
     del st.session_state.username
 
-# Streamlit app interface
 st.title('Welcome to :violet[BrainWave] :sunglasses:')
 
-# Initialize session state variables
-# if 'username' not in st.session_state:
-#     st.session_state.username = ''
 if 'useremail' not in st.session_state:
     st.session_state.useremail = ''
 if "signedout" not in st.session_state:
@@ -126,7 +112,7 @@ if 'signout' not in st.session_state:
     st.session_state['signout'] = False
 
 if not st.session_state["signedout"]:
-    choice = st.selectbox('Login/Signup', ['Sign up','Login', 'forgot password'])
+    choice = st.selectbox('Login/Signup', ['Sign up', 'Login', 'forgot password'])
 
     if choice == "Sign up":
         username = st.text_input('👤 Enter unique username')
@@ -154,21 +140,19 @@ if not st.session_state["signedout"]:
         otp_generated = generateOTP()
 
         sender_email = "anannya0316@gmail.com"
-        password = st.secrets['mail_pwd'] # Your App Password
+        password = st.secrets['mail_pwd']  # Your App Password
         subject = "BrainWave password recovery"
         body = f"Verification OTP for password recovery - {otp_generated}."
 
         if "vote" not in st.session_state:
-            reset_mail = st.text_input("Enter your registered mail: ")
-
+            reset_mail = st.text_input("Enter your registered mail:")
 
         if st.button("NEXT"):
-            if reset_mail and email_exists(reset_mail) == False:
+            if reset_mail and not email_exists(reset_mail):
                 st.error("❌ Your mail is not registered with BrainWave")
             else:
-                send_otp(sender_email,reset_mail, password, subject, body)
+                send_otp(sender_email, reset_mail, password, subject, body)
                 verify_popup(reset_mail, otp_generated)
-
 
 if st.session_state.signout:
     st.success(f"✔️ logged in as :- **{st.session_state.username}**")
