@@ -2,14 +2,13 @@ import streamlit as st
 import pymongo
 from otp_test import generateOTP, send_otp
 
-# Diagnostic check to print available secrets keys and MongoDB connection string
+# Print available secrets keys to diagnose issues
 st.write("Available secrets keys:", st.secrets.keys())
 
+# Load MongoDB connection string from secrets
 try:
-    # Load MongoDB connection string from secrets
     mongodb_connect = st.secrets["mongodb_atlas"]["mongodb_connect"]
     st.write("MongoDB connection string loaded successfully.")
-    st.write("MongoDB connection string:", mongodb_connect)
 except KeyError as e:
     st.error(f"KeyError: {e}")
 except Exception as e:
