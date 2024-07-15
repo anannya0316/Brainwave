@@ -6,8 +6,8 @@ mongodb_connect = st.secrets["mongodb_atlas"]["mongodb_connect"]
 
 def update_password(email, new_password):
 
-    myclient = pymongo.MongoClient("mongodb://localhost:27017")
-    # myclient = pymongo.MongoClient(mongodb_connect)
+    # myclient = pymongo.MongoClient("mongodb://localhost:27017")
+    myclient = pymongo.MongoClient(mongodb_connect)
     mydb = myclient["Brainwave"]
     mycol = mydb["Login_Credentials"]
 
