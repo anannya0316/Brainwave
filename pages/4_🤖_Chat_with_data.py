@@ -10,22 +10,10 @@ from langchain_groq import ChatGroq
 import tempfile
 import os
 import uuid
-from pymongo import MongoClient
 
 st.title("🤖💬 Chat with Data")
 
 tab1, tab2 = st.tabs(["Chat with PDF", "Chat with Website"])
-
-# Load MongoDB connection string from secrets
-try:
-    mongodb_connect = st.secrets["mongodb_atlas"]["mongodb_connect"]
-    client = MongoClient(mongodb_connect)
-    db = client.myFirstDatabase  # Replace 'myFirstDatabase' with your database name
-    st.write("MongoDB connection established successfully.")
-except KeyError as e:
-    st.error(f"KeyError: {e}")
-except Exception as e:
-    st.error(f"Error connecting to MongoDB: {e}")
 
 groq_api_key = st.secrets["GROQ_API_KEY"]
 llm = ChatGroq(groq_api_key=groq_api_key, model_name="Llama3-8b-8192")
