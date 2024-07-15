@@ -3,15 +3,15 @@ import json
 from streamlit_lottie import st_lottie
 
 from utils import contributor_card, enric_info
-with st.sidebar:
+# with st.sidebar:
 
-    st.divider()
+#     st.divider()
 
-    st.write("### 👨‍💻 Developed by:")
-    st.markdown(contributor_card(
-        **enric_info,
-        ), 
-        unsafe_allow_html=True)
+#     st.write("### 👨‍💻 Developed by:")
+#     st.markdown(contributor_card(
+#         **enric_info,
+#         ), 
+#         unsafe_allow_html=True)
     
 st.title("🧠 Brainwave: 🤖 Empowering Your Knowledge Base")
 
