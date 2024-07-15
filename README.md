@@ -14,7 +14,7 @@ To get started with BrainWave, follow these steps:
 
 1. **Clone the Repository**
     ```bash
-    git clone [https://github.com/mayurd8862/Brainwave-Empowering-Your-Knowledge-Base.git](https://github.com/anannya0316/Brainwave.git)
+    git clone https://github.com/anannya0316/Brainwave.git
     ```
 
 2. **Install Dependencies**
