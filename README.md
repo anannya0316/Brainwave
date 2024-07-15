@@ -41,8 +41,6 @@ The web application architecture will consist of the following components:
 - The frontend of the application is developed using Streamlit, a powerful and easy-to-use framework for building data-driven web applications.
 - Streamlit allows for rapid prototyping and development, providing an interactive and responsive user interface for the application.
 
-![image](https://github.com/mayurd8862/Brainwave-Empowering-Your-Knowledge-Base/assets/113239727/38ac6223-a0bc-4c3c-99ed-ac8ea335e6f1)
-
   
 ### 2. Sign Up, Sign In Option and Forgot Password Along with Email OTP Verification:
 
