@@ -1,7 +1,8 @@
 import streamlit as st
 import pymongo
 from otp_test import generateOTP,send_otp
-mongodb_connect = st.secrets.mongodb_atlas
+# mongodb_connect = st.secrets.mongodb_atlas
+mongodb_connect = st.secrets["mongodb_atlas"]["mongodb_connect"]
 
 def update_password(email, new_password):
 
