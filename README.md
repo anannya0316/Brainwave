@@ -90,7 +90,7 @@ The web application architecture will consist of the following components:
 - Any changes made to the codebase are automatically tested and deployed to the live environment, ensuring that the latest updates are always available to users without manual intervention.
 
 ---
-[[[Click here](https://brainwave-anannya.streamlit.app/Chat_with_data)]] to use the web application.
+[[[Click here](https://brainwave-anannya.streamlit.app/)]] to use the web application.
 
 Thank you for using **🧠 Brainwave: 🤖 Empowering Your Knowledge Base**! We hope it significantly boosts your productivity and makes project management a breeze.
 
