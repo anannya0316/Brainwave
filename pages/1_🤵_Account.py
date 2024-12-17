@@ -28,7 +28,7 @@ def email_exists(email):
         return False
 
 
-@st.experimental_dialog("🔑 Reset Your Password")
+@st.dialog("🔑 Reset Your Password")
 def verify_popup(mail,otp_generated):
     
     st.write(f"Verification OTP sent on your mail '{mail}'")
