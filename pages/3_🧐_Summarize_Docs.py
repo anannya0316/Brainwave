@@ -2,7 +2,7 @@ import streamlit as st
 import asyncio
 from langchain_community.document_loaders import PyPDFLoader
 from PyPDF2 import PdfReader
-from langchain_core.prompts import PromptTemplate
+from langchain.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 # from langchain_openai import ChatOpenAI
 from langchain.chains.summarize import load_summarize_chain
