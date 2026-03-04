@@ -1,7 +1,7 @@
 streamlit
 streamlit_chat
 pymongo
-langchain
+langchain==0.0.350
 langchain_google_genai
 pypdf
 streamlit_lottie
