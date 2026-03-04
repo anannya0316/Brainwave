@@ -7,7 +7,7 @@ pypdf
 streamlit_lottie
 openai
 langchain_groq
-langchain_community
+langchain-community==0.0.20
 datetime
 PyPDF2
 sentence-transformers
