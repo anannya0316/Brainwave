@@ -2,12 +2,12 @@ streamlit
 streamlit_chat
 pymongo
 
-langchain==0.0.350
-langchain-community==0.0.19
+langchain
+langchain-community
 
-langchain_google_genai==1.0.5
-google-generativeai==0.5.4
-langchain_groq==0.0.1
+langchain_google_genai
+google-generativeai
+langchain_groq
 
 pypdf
 streamlit_lottie
